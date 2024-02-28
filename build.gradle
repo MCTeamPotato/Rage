@@ -33,19 +33,6 @@ repositories {
         name 'ParchmentMC'
         url 'https://maven.parchmentmc.org'
     }
-    maven {
-        url "https://cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
-    }
-    maven {
-        name = "Modrinth"
-        url = "https://api.modrinth.com/maven"
-        content {
-            includeGroup "maven.modrinth"
-        }
-    }
 }
 
 dependencies {
@@ -54,11 +41,7 @@ dependencies {
         officialMojangMappings()
         parchment("org.parchmentmc.data:parchment-${minecraft_version}:${parchment_version}@zip")
     }
-    //mappings "net.fabricmc:yarn:${minecraft_version}+build.${project.yarn_mappings}:v2"
     forge "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    modImplementation("maven.modrinth:potacore:0.2.8")
-    modImplementation("maven.modrinth:potacore:0.2.8:universal-sources")
-    modImplementation("maven.modrinth:potacore:0.2.8:universal-javadoc")
 }
 
 processResources {
