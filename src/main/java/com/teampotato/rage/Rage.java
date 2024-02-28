@@ -66,8 +66,8 @@ public class Rage {
     private static void processRageOnAttack(Entity entity, LivingHurtEvent event) {
         if (entity instanceof LivingEntity) {
             if (((RageHolder)entity).rage$isFullRage()) {
-                ((RageHolder) entity).rage$clearRage();
                 event.setAmount(((RageHolder)entity).rage$getDamageBonus() * event.getAmount());
+                ((RageHolder) entity).rage$clearRage();
             } else {
                 ((RageHolder)entity).rage$bumpRage();
             }
