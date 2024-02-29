@@ -76,7 +76,7 @@ String currentChangeLog = file("CHANGELOG.md").getText("UTF-8");
 
 modrinth {
     token = System.getenv("MODRINTH_TOKEN")
-    projectId = "${archives_base_name}"
+    projectId = "rage-mod"
     versionNumber = "${mod_version}"
     uploadFile = remapJar
     gameVersions.addAll(supportedGameVersions)
