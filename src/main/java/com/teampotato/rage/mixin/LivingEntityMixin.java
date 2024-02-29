@@ -45,16 +45,4 @@ public abstract class LivingEntityMixin extends Entity implements RageHolder {
             ((Player)self).displayClientMessage(new TranslatableComponent("rage.notify", this.rage$getRage()), true);
         }
     }
-
-    @Override
-    public boolean rage$isFullRage() {
-        return this.rage$currentRage >= Rage.FULL_RAGE_VALUE.get();
-    }
-
-    @Override
-    public float rage$getDamageBonus() {
-        float bonus = Rage.BASIC_DAMAGE_BONUS.get() + (((float) this.rage$getRage()) - 100F) / 100F;
-        if (bonus > Rage.MAX_DAMAGE_BONUS.get()) bonus = Rage.MAX_DAMAGE_BONUS.get();
-        return bonus;
-    }
 }
