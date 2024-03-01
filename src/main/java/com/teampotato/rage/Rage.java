@@ -20,6 +20,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import org.jetbrains.annotations.NotNull;
 
+@SuppressWarnings("resource")
 @Mod(Rage.MOD_ID)
 public class Rage {
     public static final String MOD_ID = "rage";
@@ -61,21 +62,21 @@ public class Rage {
         if (event.phase != TickEvent.Phase.START) return;
         Player player = event.player;
         if (((RageHolder)player).rage$isFullRage() && player instanceof ServerPlayer) {
-            ((ServerPlayer) player).getLevel().sendParticles(ParticleTypes.CRIT, player.getX(), player.getY(), player.getZ(), 8, 0.2, 0.2, 0.2, 0.0);
+            ((ServerPlayer) player).serverLevel().sendParticles(ParticleTypes.CRIT, player.getX(), player.getY(), player.getZ(), 8, 0.2, 0.2, 0.2, 0.0);
         }
     }
 
     private void showParticleOnFullRageLiving(LivingEvent.LivingTickEvent event) {
         if (!SHOW_PARTICLE_ON_FULL_RAGE.get()) return;
         LivingEntity entity = event.getEntity();
-        if (((RageHolder)entity).rage$isFullRage() && entity.level instanceof ServerLevel) {
-            ((ServerLevel) entity.level).sendParticles(ParticleTypes.CRIT, entity.getX(), entity.getY(), entity.getZ(), 8, 0.2, 0.2, 0.2, 0.0);
+        if (((RageHolder)entity).rage$isFullRage() && entity.level() instanceof ServerLevel) {
+            ((ServerLevel) entity.level()).sendParticles(ParticleTypes.CRIT, entity.getX(), entity.getY(), entity.getZ(), 8, 0.2, 0.2, 0.2, 0.0);
         }
     }
 
     private void bumpRageOnHurt(LivingHurtEvent event) {
         LivingEntity entity = event.getEntity();
-        if (entity.level.isClientSide()) return;
+        if (entity.level().isClientSide()) return;
         if (shouldBumpRage(event.getSource())) ((RageHolder)entity).rage$bumpRage();
     }
 
@@ -86,7 +87,7 @@ public class Rage {
     }
 
     private void bumpOrUseRageOnAttack(LivingHurtEvent event) {
-        if (event.getEntity().level.isClientSide()) return;
+        if (event.getEntity().level().isClientSide()) return;
         DamageSource damageSource = event.getSource();
         Entity entity = damageSource.getEntity();
         Entity directEntity = damageSource.getDirectEntity();
