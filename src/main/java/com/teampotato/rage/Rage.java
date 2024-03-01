@@ -65,16 +65,16 @@ public class Rage {
         }
     }
 
-    private void showParticleOnFullRageLiving(LivingEvent.LivingUpdateEvent event) {
+    private void showParticleOnFullRageLiving(LivingEvent.LivingTickEvent event) {
         if (!SHOW_PARTICLE_ON_FULL_RAGE.get()) return;
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         if (((RageHolder)entity).rage$isFullRage() && entity.level instanceof ServerLevel) {
             ((ServerLevel) entity.level).sendParticles(ParticleTypes.CRIT, entity.getX(), entity.getY(), entity.getZ(), 8, 0.2, 0.2, 0.2, 0.0);
         }
     }
 
     private void bumpRageOnHurt(LivingHurtEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         if (entity.level.isClientSide()) return;
         if (shouldBumpRage(event.getSource())) ((RageHolder)entity).rage$bumpRage();
     }

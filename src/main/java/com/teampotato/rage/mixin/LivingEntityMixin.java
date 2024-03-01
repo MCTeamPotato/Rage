@@ -2,7 +2,7 @@ package com.teampotato.rage.mixin;
 
 import com.teampotato.rage.Rage;
 import com.teampotato.rage.api.RageHolder;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -42,7 +42,7 @@ public abstract class LivingEntityMixin extends Entity implements RageHolder {
         if (!Rage.NOTIFY_PLAYER_ON_RAGE_CHANGE.get()) return;
         LivingEntity self = (LivingEntity) (Object) this;
         if (self instanceof Player) {
-            ((Player)self).displayClientMessage(new TranslatableComponent("rage.notify", this.rage$getRage()), true);
+            ((Player)self).displayClientMessage(Component.translatable("rage.notify", this.rage$getRage()), true);
         }
     }
 }
