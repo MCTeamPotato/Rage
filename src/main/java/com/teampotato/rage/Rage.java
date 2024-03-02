@@ -88,7 +88,7 @@ public class Rage {
     }
 
     private void bumpOrUseRageOnAttack(LivingHurtEvent event) {
-        LivingEntity attacked = event.getEntityLiving();
+        LivingEntity attacked = event.getEntity();
         Level level = attacked.level;
         if (level.isClientSide()) return;
         DamageSource damageSource = event.getSource();
