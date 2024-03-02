@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:torch"
+    },
+    "title": {
+      "translate": "adv.rage.full_rage"
+    },
+    "description": {
+      "translate": "adv.rage.full_rage.desc"
+    },
+    "frame": "goal"
+  },
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "placeholder": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

@@ -9,6 +9,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
@@ -34,7 +35,7 @@ public class Rage {
     }
 
     public static final ForgeConfigSpec CONFIG;
-    public static final ForgeConfigSpec.BooleanValue NOTIFY_PLAYER_ON_RAGE_CHANGE, SHOW_PARTICLE_ON_FULL_RAGE, PLAY_DING_ON_FULL_RAGE_ATTACK;
+    public static final ForgeConfigSpec.BooleanValue NOTIFY_PLAYER_ON_RAGE_CHANGE, SHOW_PARTICLE_ON_FULL_RAGE, PLAY_DING_ON_FULL_RAGE_ATTACK, NOTIFY_PLAYER_ON_REACHING_FULL_RAGE;
     public static final ForgeConfigSpec.DoubleValue MAX_DAMAGE_BONUS, BASIC_DAMAGE_BONUS, DING_VOLUME, DING_PITCH;
     public static final ForgeConfigSpec.IntValue FULL_RAGE_VALUE, GAINED_RAGE_PER_HURT_OR_ATTACK;
 
@@ -43,6 +44,7 @@ public class Rage {
         builder.push("Rage");
         SHOW_PARTICLE_ON_FULL_RAGE = builder.define("ShowParticleOnFullRage", true);
         NOTIFY_PLAYER_ON_RAGE_CHANGE = builder.define("NotifyPlayerOnRageChange", false);
+        NOTIFY_PLAYER_ON_REACHING_FULL_RAGE = builder.define("NotifyPlayerOnFullRage", true);
         BASIC_DAMAGE_BONUS = builder.defineInRange("BasicDamageBonus", 3.0, 0.0, Double.MAX_VALUE);
         MAX_DAMAGE_BONUS = builder.defineInRange("MaxDamageBonus", 5.0, 0.0, Double.MAX_VALUE);
         FULL_RAGE_VALUE = builder.defineInRange("FullRageValue", 150, 0, Integer.MAX_VALUE);
@@ -86,23 +88,27 @@ public class Rage {
     }
 
     private void bumpOrUseRageOnAttack(LivingHurtEvent event) {
-        if (event.getEntity().level.isClientSide()) return;
+        LivingEntity attacked = event.getEntityLiving();
+        Level level = attacked.level;
+        if (level.isClientSide()) return;
         DamageSource damageSource = event.getSource();
         Entity entity = damageSource.getEntity();
         Entity directEntity = damageSource.getDirectEntity();
-        processRageOnAttack(entity, event);
+        processRageOnAttack(entity, event, level, attacked);
         if (directEntity != null && directEntity.equals(entity)) return;
-        processRageOnAttack(directEntity, event);
+        processRageOnAttack(directEntity, event, level, attacked);
     }
 
-    private static void processRageOnAttack(Entity entity, LivingHurtEvent event) {
-        if (entity instanceof LivingEntity) {
-            if (((RageHolder)entity).rage$isFullRage()) {
-                event.setAmount((float) (((RageHolder)entity).rage$getDamageBonus() * (double) event.getAmount()));
-                if (PLAY_DING_ON_FULL_RAGE_ATTACK.get()) entity.playSound(SoundEvents.ARROW_HIT_PLAYER, DING_VOLUME.get().floatValue(), DING_PITCH.get().floatValue());
-                ((RageHolder) entity).rage$clearRage();
+    private static void processRageOnAttack(Entity sourceEntity, LivingHurtEvent event, Level level, LivingEntity attacked) {
+        if (sourceEntity instanceof LivingEntity) {
+            if (((RageHolder)sourceEntity).rage$isFullRage()) {
+                event.setAmount((float) (((RageHolder)sourceEntity).rage$getDamageBonus() * (double) event.getAmount()));
+                if (PLAY_DING_ON_FULL_RAGE_ATTACK.get()) {
+                    level.playSound(null, attacked.blockPosition(), SoundEvents.ARROW_HIT_PLAYER, sourceEntity.getSoundSource(), DING_VOLUME.get().floatValue(), DING_PITCH.get().floatValue());
+                }
+                ((RageHolder) sourceEntity).rage$clearRage();
             } else {
-                ((RageHolder)entity).rage$bumpRage();
+                ((RageHolder)sourceEntity).rage$bumpRage();
             }
         }
     }

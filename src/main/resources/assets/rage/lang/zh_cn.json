@@ -1,3 +1,6 @@
 {
-  "rage.notify": "怒气值：%s"
+  "rage.notify": "怒气值：%s",
+  "rage.notify.full": "怒气值已满，你的下一次攻击伤害将获得增幅。",
+  "adv.rage.full_rage": "气煞我也！",
+  "adv.rage.full_rage.desc": "你通过与敌人互相伤害使自己到达了满怒气。你的下一次攻击伤害将大大增加！"
 }
