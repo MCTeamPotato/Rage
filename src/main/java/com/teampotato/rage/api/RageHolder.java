@@ -9,6 +9,8 @@ public interface RageHolder {
 
     void rage$clearRage();
 
+    void rage$decreaseRage();
+
     default boolean rage$isFullRage() {
         return this.rage$getRage() >= Rage.FULL_RAGE_VALUE.get();
     }
