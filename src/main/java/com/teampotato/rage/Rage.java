@@ -38,23 +38,29 @@ public class Rage {
     public static final ForgeConfigSpec CONFIG;
     public static final ForgeConfigSpec.BooleanValue NOTIFY_PLAYER_ON_RAGE_CHANGE, SHOW_PARTICLE_ON_FULL_RAGE, PLAY_DING_ON_FULL_RAGE_ATTACK, NOTIFY_PLAYER_ON_REACHING_FULL_RAGE;
     public static final ForgeConfigSpec.DoubleValue MAX_DAMAGE_BONUS, BASIC_DAMAGE_BONUS, DING_VOLUME, DING_PITCH;
-    public static final ForgeConfigSpec.IntValue FULL_RAGE_VALUE, GAINED_RAGE_PER_HURT_OR_ATTACK;
+    public static final ForgeConfigSpec.IntValue FULL_RAGE_VALUE, GAINED_RAGE_PER_HURT_OR_ATTACK, DECREASE_INTERVAL_TICKS, RAGE_THAT_ENTITY_LOSES_EVERY_INTERVAL;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
         builder.push("Rage");
-        SHOW_PARTICLE_ON_FULL_RAGE = builder.define("ShowParticleOnFullRage", true);
-        NOTIFY_PLAYER_ON_RAGE_CHANGE = builder.define("NotifyPlayerOnRageChange", false);
-        NOTIFY_PLAYER_ON_REACHING_FULL_RAGE = builder.define("NotifyPlayerOnFullRage", true);
         BASIC_DAMAGE_BONUS = builder.defineInRange("BasicDamageBonus", 3.0, 0.0, Double.MAX_VALUE);
         MAX_DAMAGE_BONUS = builder.defineInRange("MaxDamageBonus", 5.0, 0.0, Double.MAX_VALUE);
         FULL_RAGE_VALUE = builder.defineInRange("FullRageValue", 150, 0, Integer.MAX_VALUE);
         GAINED_RAGE_PER_HURT_OR_ATTACK = builder.defineInRange("GainedRagePerHurtOrAttack", 50, 0, Integer.MAX_VALUE);
+        builder.push("Notify");
+        SHOW_PARTICLE_ON_FULL_RAGE = builder.define("ShowParticleOnFullRage", true);
+        NOTIFY_PLAYER_ON_RAGE_CHANGE = builder.define("NotifyPlayerOnRageChange", false);
+        NOTIFY_PLAYER_ON_REACHING_FULL_RAGE = builder.define("NotifyPlayerOnFullRage", true);
         builder.pop();
         builder.push("Sound");
         PLAY_DING_ON_FULL_RAGE_ATTACK = builder.define("PlayDingOnFullRageAttack", true);
         DING_VOLUME = builder.defineInRange("DingVolume", 1.00, 0.00, Double.MAX_VALUE);
         DING_PITCH = builder.defineInRange("DingPitch", 1.00, 0.00, Double.MAX_VALUE);
+        builder.pop();
+        builder.push("Decrease");
+        DECREASE_INTERVAL_TICKS = builder.defineInRange("DecreaseIntervalTicks", 40, 0, Integer.MAX_VALUE);
+        RAGE_THAT_ENTITY_LOSES_EVERY_INTERVAL = builder.defineInRange("RageThatEntityLosesEveryInterval", 5, 0, Integer.MAX_VALUE);
+        builder.pop();
         builder.pop();
         CONFIG = builder.build();
     }

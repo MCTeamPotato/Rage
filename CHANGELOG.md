@@ -1,4 +1,2 @@
-# 0.0.3
-- Add Full Rage advancement
-- Introduce NotifyPlayerOnFullRage config option
-- Fix ding on full rage attack not working well
+# 0.0.4
+- Let rage decrease over time. Default: lose 5 rage for 2 seconds
