@@ -1,6 +1,7 @@
 package com.teampotato.rage;
 
 import com.teampotato.rage.api.RageHolder;
+import com.teampotato.rage.api.event.FullRageAttackEvent;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -110,6 +111,7 @@ public class Rage {
         if (sourceEntity instanceof LivingEntity) {
             if (((RageHolder)sourceEntity).rage$isFullRage()) {
                 event.setAmount((float) (((RageHolder)sourceEntity).rage$getDamageBonus() * (double) event.getAmount()));
+                MinecraftForge.EVENT_BUS.post(new FullRageAttackEvent(attacked, (LivingEntity) sourceEntity));
                 if (PLAY_DING_ON_FULL_RAGE_ATTACK.get()) {
                     level.playSound(null, attacked.blockPosition(), SoundEvents.ARROW_HIT_PLAYER, sourceEntity.getSoundSource(), DING_VOLUME.get().floatValue(), DING_PITCH.get().floatValue());
                 }
