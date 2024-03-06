@@ -36,7 +36,7 @@ public class Rage {
     }
 
     public static final ForgeConfigSpec CONFIG;
-    public static final ForgeConfigSpec.BooleanValue NOTIFY_PLAYER_ON_RAGE_CHANGE, SHOW_PARTICLE_ON_FULL_RAGE, PLAY_DING_ON_FULL_RAGE_ATTACK, NOTIFY_PLAYER_ON_REACHING_FULL_RAGE;
+    public static final ForgeConfigSpec.BooleanValue NOTIFY_PLAYER_ON_RAGE_CHANGE, ONLY_PLAYERS_HAVCE_RAGE, SHOW_PARTICLE_ON_FULL_RAGE, PLAY_DING_ON_FULL_RAGE_ATTACK, NOTIFY_PLAYER_ON_REACHING_FULL_RAGE;
     public static final ForgeConfigSpec.DoubleValue MAX_DAMAGE_BONUS, BASIC_DAMAGE_BONUS, DING_VOLUME, DING_PITCH;
     public static final ForgeConfigSpec.IntValue FULL_RAGE_VALUE, GAINED_RAGE_PER_HURT_OR_ATTACK, DECREASE_INTERVAL_TICKS, RAGE_THAT_ENTITY_LOSES_EVERY_INTERVAL;
 
@@ -47,6 +47,7 @@ public class Rage {
         MAX_DAMAGE_BONUS = builder.defineInRange("MaxDamageBonus", 5.0, 0.0, Double.MAX_VALUE);
         FULL_RAGE_VALUE = builder.defineInRange("FullRageValue", 150, 0, Integer.MAX_VALUE);
         GAINED_RAGE_PER_HURT_OR_ATTACK = builder.defineInRange("GainedRagePerHurtOrAttack", 50, 0, Integer.MAX_VALUE);
+        ONLY_PLAYERS_HAVCE_RAGE = builder.define("OnlyPlayersHaveRage", false);
         builder.push("Notify");
         SHOW_PARTICLE_ON_FULL_RAGE = builder.define("ShowParticleOnFullRage", true);
         NOTIFY_PLAYER_ON_RAGE_CHANGE = builder.define("NotifyPlayerOnRageChange", false);

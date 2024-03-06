@@ -5,6 +5,7 @@ import com.teampotato.rage.Rage;
 import com.teampotato.rage.api.RageHolder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -28,8 +29,11 @@ public abstract class LivingEntityMixin extends Entity implements RageHolder {
         super(type, level);
     }
 
+    @Unique private static final ResourceLocation PLAYER_ID = new ResourceLocation("minecraft:player");
+
     @Override
     public int rage$getRage() {
+        if (Rage.ONLY_PLAYERS_HAVCE_RAGE.get() && !PLAYER_ID.equals(this.getType().getRegistryName())) return 0;
         return this.rage$currentRage;
     }
 
