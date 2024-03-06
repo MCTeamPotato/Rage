@@ -30,6 +30,7 @@ public abstract class LivingEntityMixin extends Entity implements RageHolder {
 
     @Override
     public int rage$getRage() {
+        if (Rage.ONLY_PLAYERS_HAVCE_RAGE.get() && !EntityType.PLAYER.equals(this.getType())) return 0;
         return this.rage$currentRage;
     }
 
