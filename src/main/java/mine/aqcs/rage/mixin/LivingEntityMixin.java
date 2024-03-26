@@ -1,8 +1,8 @@
-package com.teampotato.rage.mixin;
+package mine.aqcs.rage.mixin;
 
 import com.google.common.base.Suppliers;
-import com.teampotato.rage.Rage;
-import com.teampotato.rage.api.RageHolder;
+import mine.aqcs.rage.Rage;
+import mine.aqcs.rage.api.RageHolder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;

@@ -1,7 +1,7 @@
-package com.teampotato.rage;
+package mine.aqcs.rage;
 
-import com.teampotato.rage.api.RageHolder;
-import com.teampotato.rage.api.event.FullRageAttackEvent;
+import mine.aqcs.rage.api.RageHolder;
+import mine.aqcs.rage.api.event.FullRageAttackEvent;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
