@@ -6,9 +6,9 @@ license = "MIT"
 modId = "rage"
 version = "${version}"
 displayName = "Rage"
-authors = "TeamPotato"
+authors = "MineAqcs"
 description = '''
-A Minecraft Mod.
+Add Rage to entities. Inspired by aoqi.100bt.com
 '''
 
 [[dependencies.rage]]
