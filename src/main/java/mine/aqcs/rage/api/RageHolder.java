@@ -1,6 +1,6 @@
-package com.teampotato.rage.api;
+package mine.aqcs.rage.api;
 
-import com.teampotato.rage.Rage;
+import mine.aqcs.rage.Rage;
 
 public interface RageHolder {
     int rage$getRage();

@@ -1,4 +1,4 @@
-package com.teampotato.rage.api.event;
+package mine.aqcs.rage.api.event;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingEvent;
